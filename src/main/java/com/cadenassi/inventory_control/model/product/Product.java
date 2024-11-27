@@ -3,14 +3,15 @@ package com.cadenassi.inventory_control.model.product;
 import com.cadenassi.inventory_control.enums.ClothingEnum;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "product")
-public class Product {
+public class Product implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -27,7 +28,8 @@ public class Product {
     @Embedded
     private Category category;
 
-    public Product() {}
+    public Product() {
+    }
 
     public Product(Long id, String name, Integer quantity, Float price, ClothingEnum clothing, Category category) {
         this.id = id;
