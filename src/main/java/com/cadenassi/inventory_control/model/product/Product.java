@@ -1,16 +1,30 @@
 package com.cadenassi.inventory_control.model.product;
 
 import com.cadenassi.inventory_control.enums.ClothingEnum;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
+@Entity
+@Table(name = "product")
 public class Product {
 
+    @Id
+    @GeneratedValue
     private Long id;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private Integer quantity;
+
+    @Column(nullable = false)
     private Float price;
+
     private ClothingEnum clothing;
+
+    @Embedded
     private Category category;
 
     public Product() {}

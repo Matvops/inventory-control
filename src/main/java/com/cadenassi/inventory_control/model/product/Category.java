@@ -7,19 +7,13 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name = "category")
+@Embeddable
 class Category implements Serializable {
-    //ATUALIZAR OU NÃO PARA V.O
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "category", nullable = false)
+    @Enumerated(EnumType.STRING)
     private CategoryEnum category;
 
-    @Column(name = "material", nullable = false)
+    @Enumerated(EnumType.STRING)
     private MaterialEnum material;
 
     public Category() {}
@@ -39,13 +33,14 @@ class Category implements Serializable {
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Category category = (Category) o;
-        return Objects.equals(id, category.id);
+        Category category1 = (Category) o;
+        return category == category1.category && material == category1.material;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hash(category, material);
     }
 }
