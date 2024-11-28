@@ -11,10 +11,11 @@ import java.util.Objects;
 class Category implements Serializable {
 
     @Enumerated(EnumType.STRING)
-    private CategoryEnum category;
+    private static CategoryEnum category;
 
     @Enumerated(EnumType.STRING)
     private MaterialEnum material;
+
 
     public Category() {}
 
