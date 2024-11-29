@@ -27,7 +27,7 @@ public class Purchase implements Serializable {
     private Date date;
 
     @OneToMany(mappedBy = "id.purchase")
-    private Set<PurchaseItem> items = new HashSet<>();
+    private final Set<PurchaseItem> items = new HashSet<>();
 
     public Purchase() {}
 
@@ -63,10 +63,6 @@ public class Purchase implements Serializable {
 
     public Set<PurchaseItem> getItems() {
         return items;
-    }
-
-    public void setItems(Set<PurchaseItem> items) {
-        this.items = items;
     }
 
     public Date getDate() {

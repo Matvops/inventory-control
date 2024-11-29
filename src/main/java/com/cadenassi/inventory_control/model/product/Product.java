@@ -1,7 +1,11 @@
 package com.cadenassi.inventory_control.model.product;
 
+import com.cadenassi.inventory_control.enums.CategoryEnum;
 import com.cadenassi.inventory_control.enums.ClothingEnum;
+import com.cadenassi.inventory_control.enums.MaterialEnum;
 import com.cadenassi.inventory_control.model.transactions.purchase.PurchaseItem;
+import com.cadenassi.inventory_control.model.transactions.sale.Sale;
+import com.cadenassi.inventory_control.model.transactions.sale.SaleItem;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -31,16 +35,37 @@ public class Product implements Serializable {
     private Category category;
 
     @OneToMany(mappedBy = "id.product")
-    private Set<PurchaseItem> items = new HashSet<>();
+    private Set<PurchaseItem> itemsPurchase = new HashSet<>();
+
+    @OneToMany(mappedBy = "id.product")
+    private Set<SaleItem> itemsSale = new HashSet<>();
 
     public Product() {}
 
-    public Product(String name, Integer quantity, Float price, ClothingEnum clothing, Category category) {
+    public Product(String name, Integer quantity, Float price, ClothingEnum clothing,
+                   CategoryEnum category, MaterialEnum material) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
         this.clothing = clothing;
-        this.category = category;
+        setCategoryEnum(category);
+        setMaterialEnum(material);
+    }
+
+    public CategoryEnum getCategoryEnum() {
+        return category.getCategory();
+    }
+
+    public MaterialEnum getMaterialEnum() {
+        return category.getMaterial();
+    }
+
+    public void setCategoryEnum(CategoryEnum category) {
+        this.category.setCategory(category);
+    }
+
+    public void setMaterialEnum(MaterialEnum material) {
+        this.category.setMaterial(material);
     }
 
     public Long getId() {
@@ -88,8 +113,13 @@ public class Product implements Serializable {
     }
 
     @JsonIgnore
-    public Set<PurchaseItem> getItems() {
-        return items;
+    public Set<PurchaseItem> getItemsPurchase() {
+        return itemsPurchase;
+    }
+
+    @JsonIgnore
+    public Set<SaleItem> getItemsSale() {
+        return itemsSale;
     }
 
     @Override

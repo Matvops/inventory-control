@@ -32,6 +32,14 @@ class Category implements Serializable {
         return material;
     }
 
+    public void setCategory(CategoryEnum category) {
+        this.category = category;
+    }
+
+    public void setMaterial(MaterialEnum material) {
+        this.material = material;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
