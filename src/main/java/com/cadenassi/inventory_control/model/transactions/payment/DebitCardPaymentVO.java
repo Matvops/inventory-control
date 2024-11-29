@@ -1,8 +1,10 @@
 package com.cadenassi.inventory_control.model.transactions.payment;
 
-public class DebitCardPayment extends Payment{
+import com.cadenassi.inventory_control.enums.PaymentEnum;
 
-    public DebitCardPayment() {
-        super(true, 1);
+public class DebitCardPaymentVO extends PaymentVO {
+
+    public DebitCardPaymentVO() {
+        super(true, 1, PaymentEnum.DEBIT_CARD);
     }
 }
