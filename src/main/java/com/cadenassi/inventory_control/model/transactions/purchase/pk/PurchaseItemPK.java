@@ -1,44 +1,38 @@
-package com.cadenassi.inventory_control.model.transactions.purchase;
+package com.cadenassi.inventory_control.model.transactions.purchase.pk;
 
 import com.cadenassi.inventory_control.model.product.Product;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.ManyToOne;
+import com.cadenassi.inventory_control.model.transactions.purchase.Purchase;
+import com.cadenassi.inventory_control.model.transactions.purchase.PurchaseItem;
+import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class PurchaseItemPK {
+public class PurchaseItemPK implements Serializable {
 
     @ManyToOne
-    private Product productId;
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-    @EmbeddedId
     @ManyToOne
-    private PurchaseVO purchaseId;
+    @JoinColumn(name ="purchase_id")
+    private Purchase purchase;
 
-
-    public PurchaseItemPK() {}
-
-    public PurchaseItemPK(Product productId, PurchaseVO purchaseId) {
-        this.productId = productId;
-        this.purchaseId = purchaseId;
+    public Product getProduct() {
+        return product;
     }
 
-    public Product getProductId() {
-        return productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public void setProductId(Product productId) {
-        this.productId = productId;
+    public Purchase getPurchase() {
+        return purchase;
     }
 
-    public PurchaseVO getPurchaseId() {
-        return purchaseId;
-    }
-
-    public void setPurchaseId(PurchaseVO purchaseId) {
-        this.purchaseId = purchaseId;
+    public void setPurchase(Purchase purchase) {
+        this.purchase = purchase;
     }
 
     @Override
@@ -46,11 +40,11 @@ public class PurchaseItemPK {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PurchaseItemPK that = (PurchaseItemPK) o;
-        return Objects.equals(productId, that.productId) && Objects.equals(purchaseId, that.purchaseId);
+        return Objects.equals(product, that.product) && Objects.equals(purchase, that.purchase);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productId, purchaseId);
+        return Objects.hash(product, purchase);
     }
 }

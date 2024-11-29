@@ -1,17 +1,21 @@
 package com.cadenassi.inventory_control.model.transactions.purchase;
 
 import com.cadenassi.inventory_control.model.person.Employee;
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Embeddable
-public class PurchaseVO implements Serializable {
+@Entity
+@Table(name = "tb_purchase")
+public class Purchase implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false)
     private Float price;
@@ -20,21 +24,25 @@ public class PurchaseVO implements Serializable {
     private String description;
 
     @Column(nullable = false)
-    private Employee employee;
+    private Date date;
 
     @OneToMany(mappedBy = "id.purchase")
     private Set<PurchaseItem> items = new HashSet<>();
 
-    public PurchaseVO() {}
+    public Purchase() {}
 
-    public PurchaseVO(Float price, String description, Employee employee) {
-        this.price = price;
+    public Purchase(Date date, String description, Float price) {
+        this.date = date;
         this.description = description;
-        this.employee = employee;
+        this.price = price;
     }
 
     public void total(){
         this.items.forEach(x -> this.price =+ x.subTotal());
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public Float getPrice() {
@@ -53,24 +61,32 @@ public class PurchaseVO implements Serializable {
         this.description = description;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public Set<PurchaseItem> getItems() {
+        return items;
     }
 
-    protected void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setItems(Set<PurchaseItem> items) {
+        this.items = items;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PurchaseVO that = (PurchaseVO) o;
-        return Objects.equals(price, that.price) && Objects.equals(description, that.description) && Objects.equals(employee, that.employee);
+        Purchase purchase = (Purchase) o;
+        return Objects.equals(id, purchase.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(price, description, employee);
+        return Objects.hashCode(id);
     }
 }
