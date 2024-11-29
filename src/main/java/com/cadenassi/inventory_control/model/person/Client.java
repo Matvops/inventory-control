@@ -11,17 +11,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "tb_employee")
-public class Employee extends Person {
+@Table(name = "tb_client")
+public class Client extends Person{
 
     @Id
     private String CPF;
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "client")
     private Set<Sale> sales = new HashSet<>();
 
-
-    public Employee(String name, String phoneNumber, String CPF) {
+    public Client(String name, String phoneNumber, String CPF) {
         super(name, phoneNumber);
         this.CPF = CPF;
     }
@@ -32,8 +31,8 @@ public class Employee extends Person {
     }
 
     @Override
-    public void setCPF(String cpf) {
-        this.CPF = cpf;
+    public void setCPF(String CPF) {
+        this.CPF = CPF;
     }
 
     @JsonIgnore

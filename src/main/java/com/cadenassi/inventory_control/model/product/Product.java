@@ -4,7 +4,6 @@ import com.cadenassi.inventory_control.enums.CategoryEnum;
 import com.cadenassi.inventory_control.enums.ClothingEnum;
 import com.cadenassi.inventory_control.enums.MaterialEnum;
 import com.cadenassi.inventory_control.model.transactions.purchase.PurchaseItem;
-import com.cadenassi.inventory_control.model.transactions.sale.Sale;
 import com.cadenassi.inventory_control.model.transactions.sale.SaleItem;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

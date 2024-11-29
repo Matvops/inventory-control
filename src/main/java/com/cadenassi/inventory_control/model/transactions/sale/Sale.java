@@ -1,6 +1,8 @@
 package com.cadenassi.inventory_control.model.transactions.sale;
 
 
+import com.cadenassi.inventory_control.model.person.Client;
+import com.cadenassi.inventory_control.model.person.Employee;
 import com.cadenassi.inventory_control.model.transactions.payment.PaymentVO;
 import jakarta.persistence.*;
 
@@ -31,6 +33,14 @@ public class Sale{
 
     @OneToMany(mappedBy = "id.sale")
     private Set<SaleItem> items = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
 
     public Sale(PaymentVO payment, float price, Date date, String observations) {
         this.price = price;
@@ -81,6 +91,22 @@ public class Sale{
 
     public Set<SaleItem> getItems() {
         return items;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     @Override
