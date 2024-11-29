@@ -1,13 +1,15 @@
 package com.cadenassi.inventory_control.model.product;
 
 import com.cadenassi.inventory_control.enums.ClothingEnum;
+import com.cadenassi.inventory_control.model.transactions.purchase.PurchaseItem;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
-@Table(name = "product")
+@Table(name = "tb_product")
 public class Product implements Serializable {
 
     @Id
@@ -28,11 +30,12 @@ public class Product implements Serializable {
     @Embedded
     private Category category;
 
-    public Product() {
-    }
+    @OneToMany(mappedBy = "id.product")
+    private Set<PurchaseItem> items = new HashSet<>();
 
-    public Product(Long id, String name, Integer quantity, Float price, ClothingEnum clothing, Category category) {
-        this.id = id;
+    public Product() {}
+
+    public Product(String name, Integer quantity, Float price, ClothingEnum clothing, Category category) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
@@ -42,10 +45,6 @@ public class Product implements Serializable {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -86,6 +85,11 @@ public class Product implements Serializable {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    @JsonIgnore
+    public Set<PurchaseItem> getItems() {
+        return items;
     }
 
     @Override

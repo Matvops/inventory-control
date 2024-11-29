@@ -1,4 +1,4 @@
-package com.cadenassi.inventory_control.model;
+package com.cadenassi.inventory_control.model.person;
 
 public class Person {
 }
