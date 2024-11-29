@@ -1,6 +1,8 @@
-package com.cadenassi.inventory_control.model.transactions;
+package com.cadenassi.inventory_control.model.transactions.sale;
 
-public class Sale implements Transaction{
+import com.cadenassi.inventory_control.model.transactions.Transaction;
+
+public class Sale implements Transaction {
 
     @Override
     public void execute() {
