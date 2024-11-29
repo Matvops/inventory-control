@@ -31,7 +31,7 @@ public class Product implements Serializable {
     private ClothingEnum clothing;
 
     @Embedded
-    private Category category;
+    private Category category = new Category();
 
     @OneToMany(mappedBy = "id.product")
     private Set<PurchaseItem> itemsPurchase = new HashSet<>();

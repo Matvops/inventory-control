@@ -1,4 +1,4 @@
-package com.cadenassi.inventory_control.repositories.tra;
+package com.cadenassi.inventory_control.repositories.transaction;
 
 import com.cadenassi.inventory_control.model.transactions.sale.Sale;
 import org.springframework.data.jpa.repository.JpaRepository;
