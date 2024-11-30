@@ -22,7 +22,7 @@ public enum CategoryEnum {
     CAMISETA,
     INTIMA;
 
-    public CategoryEnum getCategory(int i){
+    public static CategoryEnum getCategory(int i){
         List<CategoryEnum> categories = new ArrayList<>(Arrays.asList(CategoryEnum.values()));
 
         return categories.get(i);

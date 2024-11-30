@@ -16,7 +16,7 @@ public enum MaterialEnum {
     SEGUNDA_LINHA,
     TACTEL;
 
-    public MaterialEnum getMaterial(int i){
+    public static MaterialEnum getMaterial(int i){
         List<MaterialEnum> materials = new ArrayList<>(Arrays.asList(MaterialEnum.values()));
 
         return materials.get(i);

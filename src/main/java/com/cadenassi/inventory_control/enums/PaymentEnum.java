@@ -12,7 +12,7 @@ public enum PaymentEnum {
     ON_THE_CUFF,
     PIX;
 
-    public PaymentEnum getPayment(int i){
+    public static PaymentEnum getPayment(int i){
         List<PaymentEnum> payments = new ArrayList<>(Arrays.asList(PaymentEnum.values()));
 
         return payments.get(i);

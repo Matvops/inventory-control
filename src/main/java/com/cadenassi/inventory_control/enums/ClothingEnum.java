@@ -22,7 +22,7 @@ public enum ClothingEnum {
     QUICK_SILVER,
     TOMMY_HILFIGER;
 
-    public ClothingEnum getClothing(int i){
+    public static ClothingEnum getClothing(int i){
         List<ClothingEnum> clothingEnums = new ArrayList<>(Arrays.asList(ClothingEnum.values()));
 
         return clothingEnums.get(i);
