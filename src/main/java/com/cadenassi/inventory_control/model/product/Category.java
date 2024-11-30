@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-class Category implements Serializable {
+public class Category implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private CategoryEnum category;
