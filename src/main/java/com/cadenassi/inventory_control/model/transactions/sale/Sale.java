@@ -3,6 +3,7 @@ package com.cadenassi.inventory_control.model.transactions.sale;
 
 import com.cadenassi.inventory_control.model.person.Client;
 import com.cadenassi.inventory_control.model.person.Employee;
+import com.cadenassi.inventory_control.model.person.Person;
 import com.cadenassi.inventory_control.model.transactions.payment.Payment;
 import jakarta.persistence.*;
 

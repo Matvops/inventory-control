@@ -2,40 +2,23 @@ package com.cadenassi.inventory_control.model.person;
 
 import com.cadenassi.inventory_control.model.transactions.sale.Sale;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "tb_client")
+@DiscriminatorValue(value = "CLIENT")
 public class Client extends Person{
-
-    @Id
-    private String CPF;
 
     @OneToMany(mappedBy = "client")
     private Set<Sale> sales = new HashSet<>();
 
-    public Client(String name, String phoneNumber, String CPF) {
-        super(name, phoneNumber);
-        this.CPF = CPF;
+    public Client(String CPF, String name, String phoneNumber) {
+        super(CPF, name, phoneNumber);
     }
 
     @Override
-    public String getCPF() {
-        return this.CPF;
-    }
-
-    @Override
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
-    }
-
-    @JsonIgnore
     public Set<Sale> getSales() {
         return sales;
     }

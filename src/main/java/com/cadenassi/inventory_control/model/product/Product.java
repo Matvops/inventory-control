@@ -28,6 +28,7 @@ public class Product implements Serializable {
     @Column(nullable = false)
     private Float price;
 
+    @Enumerated(EnumType.STRING)
     private ClothingEnum clothing;
 
     @Embedded
