@@ -3,7 +3,7 @@ package com.cadenassi.inventory_control.model.transactions.sale;
 
 import com.cadenassi.inventory_control.model.person.Client;
 import com.cadenassi.inventory_control.model.person.Employee;
-import com.cadenassi.inventory_control.model.transactions.payment.PaymentVO;
+import com.cadenassi.inventory_control.model.transactions.payment.Payment;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -28,8 +28,9 @@ public class Sale{
     @Column(nullable = false)
     private Date date;
 
-    @Embedded
-    private PaymentVO payment;
+    @ManyToOne
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
 
     @OneToMany(mappedBy = "id.sale")
     private Set<SaleItem> items = new HashSet<>();
@@ -42,7 +43,7 @@ public class Sale{
     @JoinColumn(name = "client_id")
     private Client client;
 
-    public Sale(PaymentVO payment, float price, Date date, String observations) {
+    public Sale(Payment payment, float price, Date date, String observations) {
         this.price = price;
         this.date = date;
         this.observations = observations;
@@ -81,11 +82,11 @@ public class Sale{
         this.date = date;
     }
 
-    public PaymentVO getPayment() {
+    public Payment getPayment() {
         return payment;
     }
 
-    public void setPayment(PaymentVO payment) {
+    public void setPayment(Payment payment) {
         this.payment = payment;
     }
 
