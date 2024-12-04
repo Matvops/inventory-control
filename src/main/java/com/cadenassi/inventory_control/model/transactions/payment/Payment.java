@@ -17,8 +17,6 @@ public abstract class Payment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private boolean paid;
-
     @Column(name = "number_installment")
     private int numberInstallments;
 
@@ -27,8 +25,7 @@ public abstract class Payment implements Serializable {
 
     private PaymentEnum payment;
 
-    public Payment(boolean paid, int numberInstallments, PaymentEnum payment) {
-        this.paid = paid;
+    public Payment(int numberInstallments, PaymentEnum payment) {
         this.numberInstallments = numberInstallments;
         this.payment = payment;
     }
@@ -39,14 +36,6 @@ public abstract class Payment implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public boolean isPaid() {
-        return paid;
-    }
-
-    public void setPaid(boolean paid) {
-        this.paid = paid;
     }
 
     public int getNumberInstallments() {

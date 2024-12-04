@@ -4,6 +4,6 @@ import com.cadenassi.inventory_control.enums.PaymentEnum;
 
 public class MoneyPayment extends Payment {
     public MoneyPayment() {
-        super(true, 1, PaymentEnum.MONEY);
+        super(1, PaymentEnum.MONEY);
     }
 }

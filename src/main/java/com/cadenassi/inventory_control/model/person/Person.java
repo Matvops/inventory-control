@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -16,28 +15,29 @@ import java.util.Set;
 public abstract class Person implements Serializable {
 
     @Id
-    private String CPF;
+    private String cpf;
 
     @Column(nullable = false)
     private String name;
 
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     public Person() {
     }
 
-    public Person(String CPF, String name, String phoneNumber) {
-        this.CPF = CPF;
+    public Person(String cpf, String name, String phoneNumber) {
+        this.cpf = cpf;
         this.name = name;
         this.phoneNumber = phoneNumber;
     }
 
-    public String getCPF() {
-        return CPF;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getName() {
@@ -63,11 +63,11 @@ public abstract class Person implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return Objects.equals(CPF, person.CPF);
+        return Objects.equals(cpf, person.cpf);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(CPF);
+        return Objects.hashCode(cpf);
     }
 }

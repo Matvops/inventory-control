@@ -1,9 +1,9 @@
 package com.cadenassi.inventory_control.model.transactions.sale;
 
 
+import com.cadenassi.inventory_control.enums.PaymentEnum;
 import com.cadenassi.inventory_control.model.person.Client;
 import com.cadenassi.inventory_control.model.person.Employee;
-import com.cadenassi.inventory_control.model.person.Person;
 import com.cadenassi.inventory_control.model.transactions.payment.Payment;
 import jakarta.persistence.*;
 
@@ -29,6 +29,8 @@ public class Sale{
     @Column(nullable = false)
     private Date date;
 
+    private boolean paid;
+
     @ManyToOne
     @JoinColumn(name = "payment_id")
     private Payment payment;
@@ -44,11 +46,12 @@ public class Sale{
     @JoinColumn(name = "client_id")
     private Client client;
 
-    public Sale(Payment payment, float price, Date date, String observations) {
+    public Sale(Payment payment, float price, Date date, String observations, boolean paid) {
         this.price = price;
         this.date = date;
         this.observations = observations;
         this.payment = payment;
+        setPaid(paid);
     }
 
     public void total(){
@@ -109,6 +112,19 @@ public class Sale{
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public boolean isPaid() {
+        return paid;
+    }
+
+    public void setPaid(boolean paid) {
+        if(!getPayment().getPayment().equals(PaymentEnum.ON_THE_CUFF)) {
+            this.paid = false;
+            return;
+        }
+
+        this.paid = true;
     }
 
     @Override
