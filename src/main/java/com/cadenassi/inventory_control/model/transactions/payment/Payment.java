@@ -23,6 +23,7 @@ public abstract class Payment implements Serializable {
     @OneToMany(mappedBy = "payment")
     private List<Sale> sales = new ArrayList<>();
 
+    @Enumerated(EnumType.STRING)
     private PaymentEnum payment;
 
     public Payment(int numberInstallments, PaymentEnum payment) {
