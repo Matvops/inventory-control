@@ -3,6 +3,7 @@ package com.cadenassi.inventory_control.services;
 import com.cadenassi.inventory_control.dto.mappers.ProductMapper;
 import com.cadenassi.inventory_control.dto.objects.ProductDTO;
 import com.cadenassi.inventory_control.enums.ClothingEnum;
+import com.cadenassi.inventory_control.exceptions.ResourceNotFoundException;
 import com.cadenassi.inventory_control.model.product.Category;
 import com.cadenassi.inventory_control.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class ProductService {
 
     public ProductDTO getProductById(Long id){
         var product = mapper.toProductDTO(repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("ERROR GET BY ID")));
+                .orElseThrow(() -> new ResourceNotFoundException("ID not found!")));
 
         return product;
     }
@@ -52,7 +53,8 @@ public class ProductService {
     }
 
     public ProductDTO update(Long id, ProductDTO product){
-        var dto = mapper.toProductDTO(repository.findById(id).orElseThrow(() -> new RuntimeException("error1")));
+        var dto = mapper.toProductDTO(repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("ID not found!")));
 
         dto.setName(product.getName());
         dto.setCategory(product.getCategory());
