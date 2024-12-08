@@ -28,6 +28,12 @@ public class Product implements Serializable {
     @Column(nullable = false)
     private Float price;
 
+    @Column
+    private Date created;
+
+    @Column
+    private Date last_update;
+
     @Enumerated(EnumType.STRING)
     private ClothingEnum clothing;
 
@@ -50,6 +56,17 @@ public class Product implements Serializable {
         this.clothing = clothing;
         setCategoryEnum(category);
         setMaterialEnum(material);
+    }
+
+    @PrePersist
+    private void onCreate(){
+        this.created = new Date();
+        this.last_update = new Date();
+    }
+
+    @PreUpdate
+    private void onUpdate(){
+        this.last_update = new Date();
     }
 
     public CategoryEnum getCategoryEnum() {
@@ -110,6 +127,22 @@ public class Product implements Serializable {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getLast_update() {
+        return last_update;
+    }
+
+    public void setLast_update(Date last_update) {
+        this.last_update = last_update;
     }
 
     @JsonIgnore

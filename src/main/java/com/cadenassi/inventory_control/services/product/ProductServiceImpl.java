@@ -1,4 +1,4 @@
-package com.cadenassi.inventory_control.services;
+package com.cadenassi.inventory_control.services.product;
 
 import com.cadenassi.inventory_control.dto.mappers.ProductMapper;
 import com.cadenassi.inventory_control.dto.objects.ProductDTO;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProductService {
+public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductRepository repository;
@@ -20,19 +20,22 @@ public class ProductService {
     @Autowired
     private ProductMapper mapper;
 
+    @Override
     public List<ProductDTO> getAllProducts(){
         var products = mapper.toListProductDTO(repository.findAll());
 
         return products;
     }
 
-    public ProductDTO getProductById(Long id){
-        var product = mapper.toProductDTO(repository.findById(id)
+    @Override
+    public ProductDTO getProductById(String id){
+        var product = mapper.toProductDTO(repository.findById(Long.parseLong(id))
                 .orElseThrow(() -> new ResourceNotFoundException("ID not found!")));
 
         return product;
     }
 
+    @Override
     public List<ProductDTO> getProductByName(String name){
         var product = mapper.toListProductDTO(repository.getProductByFilter("NAME", name));
 
@@ -40,29 +43,32 @@ public class ProductService {
         return product;
     }
 
+    @Override
     public List<ProductDTO> getProductByCategory(Category category){
         var products = mapper.toListProductDTO(repository.getProductByFilter("CATEGORY", category.toString()));
 
         return products;
     }
 
+    @Override
     public List<ProductDTO> getProductByClothing(ClothingEnum clothing){
         var products = mapper.toListProductDTO(repository.getProductByFilter("CLOTHING", clothing.toString()));
 
         return products;
     }
 
-    public ProductDTO update(Long id, ProductDTO product){
-        var dto = mapper.toProductDTO(repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("ID not found!")));
+    @Override
+    public ProductDTO update(String id, ProductDTO product){
+        var originalProduct = repository.findById(Long.parseLong(id))
+                .orElseThrow(() -> new ResourceNotFoundException("ID not found!"));
 
-        dto.setName(product.getName());
-        dto.setCategory(product.getCategory());
-        dto.setClothing(product.getClothing());
-        dto.setQuantity(product.getQuantity());
-        dto.setPrice(product.getPrice());
+        originalProduct.setName(product.getName());
+        originalProduct.setCategory(product.getCategory());
+        originalProduct.setClothing(product.getClothing());
+        originalProduct.setQuantity(product.getQuantity());
+        originalProduct.setPrice(product.getPrice());
 
-        repository.save(mapper.toProduct(dto));
-        return dto;
+        repository.save(originalProduct);
+        return mapper.toProductDTO(originalProduct);
     }
 }
