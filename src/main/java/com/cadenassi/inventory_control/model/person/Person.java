@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
@@ -23,6 +24,12 @@ public abstract class Person implements Serializable {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @Column
+    private Date created;
+
+    @Column(name = "last_update")
+    private Date lastUpdate;
+
     public Person() {
     }
 
@@ -31,6 +38,19 @@ public abstract class Person implements Serializable {
         this.name = name;
         this.phoneNumber = phoneNumber;
     }
+
+    @PrePersist
+    private void onCreate(){
+        this.created = new Date();
+        this.lastUpdate = new Date();
+    }
+
+    @PreUpdate
+    private void onUpdate(){
+        this.lastUpdate = new Date();
+    }
+
+    public abstract Set<Sale> getSales();
 
     public String getCpf() {
         return cpf;
@@ -56,7 +76,21 @@ public abstract class Person implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public abstract Set<Sale> getSales();
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
 
     @Override
     public boolean equals(Object o) {

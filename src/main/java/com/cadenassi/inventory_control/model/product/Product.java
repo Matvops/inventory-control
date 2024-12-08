@@ -31,8 +31,8 @@ public class Product implements Serializable {
     @Column
     private Date created;
 
-    @Column
-    private Date last_update;
+    @Column(name = "last_update")
+    private Date lastUpdate;
 
     @Enumerated(EnumType.STRING)
     private ClothingEnum clothing;
@@ -61,12 +61,12 @@ public class Product implements Serializable {
     @PrePersist
     private void onCreate(){
         this.created = new Date();
-        this.last_update = new Date();
+        this.lastUpdate = new Date();
     }
 
     @PreUpdate
     private void onUpdate(){
-        this.last_update = new Date();
+        this.lastUpdate = new Date();
     }
 
     public CategoryEnum getCategoryEnum() {
@@ -137,12 +137,12 @@ public class Product implements Serializable {
         this.created = created;
     }
 
-    public Date getLast_update() {
-        return last_update;
+    public Date getLastUpdate() {
+        return lastUpdate;
     }
 
-    public void setLast_update(Date last_update) {
-        this.last_update = last_update;
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 
     @JsonIgnore

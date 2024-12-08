@@ -23,18 +23,31 @@ public class Purchase implements Serializable {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false)
-    private Date date;
+    @Column
+    private Date created;
+
+    @Column(name = "last_update")
+    private Date lastUpdate;
 
     @OneToMany(mappedBy = "id.purchase")
     private final Set<PurchaseItem> items = new HashSet<>();
 
     public Purchase() {}
 
-    public Purchase(Date date, String description, Float price) {
-        this.date = date;
+    public Purchase(String description, Float price) {
         this.description = description;
         this.price = price;
+    }
+
+    @PrePersist
+    private void onCreate(){
+        this.created = new Date();
+        this.lastUpdate = new Date();
+    }
+
+    @PreUpdate
+    private void onUpdate(){
+        this.lastUpdate = new Date();
     }
 
     public void total(){
@@ -65,12 +78,20 @@ public class Purchase implements Serializable {
         return items;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCreated() {
+        return created;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 
     @Override

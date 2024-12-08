@@ -29,7 +29,14 @@ public class Sale{
     @Column(nullable = false)
     private Date date;
 
+    @Column
     private boolean paid;
+
+    @Column
+    private Date created;
+
+    @Column(name = "last_update")
+    private Date lastUpdate;
 
     @ManyToOne
     @JoinColumn(name = "payment_id")
@@ -52,6 +59,17 @@ public class Sale{
         this.observations = observations;
         this.payment = payment;
         setPaid(paid);
+    }
+
+    @PrePersist
+    private void onCreate(){
+        this.created = new Date();
+        this.lastUpdate = new Date();
+    }
+
+    @PreUpdate
+    private void onUpdate(){
+        this.lastUpdate = new Date();
     }
 
     public void total(){
@@ -125,6 +143,22 @@ public class Sale{
         }
 
         this.paid = true;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 
     @Override
