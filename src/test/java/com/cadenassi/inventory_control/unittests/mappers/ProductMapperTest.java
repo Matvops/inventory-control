@@ -4,7 +4,7 @@ import com.cadenassi.inventory_control.dto.mappers.ProductMapper;
 import com.cadenassi.inventory_control.enums.CategoryEnum;
 import com.cadenassi.inventory_control.enums.ClothingEnum;
 import com.cadenassi.inventory_control.enums.MaterialEnum;
-import com.cadenassi.inventory_control.unittests.mappers.mocks.MockProduct;
+import com.cadenassi.inventory_control.unittests.mocks.MockProduct;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 

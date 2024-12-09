@@ -1,4 +1,4 @@
-package com.cadenassi.inventory_control.unittests.mappers.mocks;
+package com.cadenassi.inventory_control.unittests.mocks;
 
 import com.cadenassi.inventory_control.dto.objects.ProductDTO;
 import com.cadenassi.inventory_control.enums.CategoryEnum;
@@ -47,14 +47,10 @@ public class MockProduct {
 
     public List<Product> getListProduct(){
         var products = new ArrayList<Product>();
-        var product = new Product();
 
         for (int i = 0; i < 10; i++){
-            product.setName("PRODUCT"+i);
-            product.setPrice(10.0f * i);
-            product.setQuantity(10 * i);
-            product.setCategoryEnum(CategoryEnum.getCategory(i));
-            product.setMaterialEnum(MaterialEnum.getMaterial(i));
+            products.add(new Product("PRODUCT"+i, 10 * i, 10f * i,
+                    ClothingEnum.getClothing(i), CategoryEnum.getCategory(i), MaterialEnum.getMaterial(i)));
         }
 
         return products;
@@ -62,14 +58,10 @@ public class MockProduct {
 
     public List<ProductDTO> getListProductDTO(){
         var products = new ArrayList<ProductDTO>();
-        var product = new ProductDTO();
 
         for (int i = 0; i < 10; i++){
-            product.setName("PRODUCT"+i);
-            product.setPrice(10.0f * i);
-            product.setQuantity(10 * i);
-            product.setClothing(ClothingEnum.getClothing(i));
-            product.setCategory(new Category(CategoryEnum.getCategory(i), MaterialEnum.getMaterial(i)));
+            products.add(new ProductDTO("PRODUCT"+i, 10 * i, 10f * i,
+                    ClothingEnum.getClothing(i), CategoryEnum.getCategory(i), MaterialEnum.getMaterial(i)));
         }
 
         return products;
