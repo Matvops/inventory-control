@@ -1,7 +1,9 @@
 package com.cadenassi.inventory_control.proxy.product;
 
 import com.cadenassi.inventory_control.dto.objects.ProductDTO;
+import com.cadenassi.inventory_control.enums.CategoryEnum;
 import com.cadenassi.inventory_control.enums.ClothingEnum;
+import com.cadenassi.inventory_control.enums.MaterialEnum;
 import com.cadenassi.inventory_control.model.product.Category;
 import com.cadenassi.inventory_control.proxy.GenericServiceProxy;
 import com.cadenassi.inventory_control.services.product.ProductService;
@@ -38,12 +40,13 @@ public class ProductServiceProxy extends GenericServiceProxy implements ProductS
     }
 
     @Override
-    public List<ProductDTO> getProductByCategory(Category category) {
+    public List<ProductDTO> getProductByCategory(CategoryEnum category, MaterialEnum material) {
         verifyIsNull(category);
-        verifyIsNull(category.getCategory());
-        verifyIsNull(category.getMaterial());
+        if(category == null && material == null)
+            verifyIsNull(null);
 
-        return service.getProductByCategory(category);
+
+        return service.getProductByCategory(category, material);
     }
 
     @Override

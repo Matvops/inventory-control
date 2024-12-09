@@ -2,7 +2,9 @@ package com.cadenassi.inventory_control.services.product;
 
 import com.cadenassi.inventory_control.dto.mappers.ProductMapper;
 import com.cadenassi.inventory_control.dto.objects.ProductDTO;
+import com.cadenassi.inventory_control.enums.CategoryEnum;
 import com.cadenassi.inventory_control.enums.ClothingEnum;
+import com.cadenassi.inventory_control.enums.MaterialEnum;
 import com.cadenassi.inventory_control.exceptions.ResourceNotFoundException;
 import com.cadenassi.inventory_control.model.product.Category;
 import com.cadenassi.inventory_control.repositories.ProductRepository;
@@ -43,9 +45,29 @@ public class ProductServiceImpl implements ProductService {
         return product;
     }
 
+
     @Override
-    public List<ProductDTO> getProductByCategory(Category category){
-        var products = mapper.toListProductDTO(repository.getProductByFilter("CATEGORY", category.toString()));
+    public List<ProductDTO> getProductByCategory(CategoryEnum category, MaterialEnum material){
+        List<ProductDTO> products = null;
+
+        if(category != null && material != null){
+            products = mapper
+                    .toListProductDTO(repository
+                            .getFilteredProductByCategory(category, material));
+
+            return products;
+        }
+
+        if(category != null) {
+            products = mapper.toListProductDTO(repository
+                    .getProductByFilter("CATEGORY", category.toString()));
+        }
+
+        if(material != null){
+             products = mapper.toListProductDTO(repository
+                    .getProductByFilter("MATERIAL", material.toString()));
+        }
+
 
         return products;
     }
