@@ -7,6 +7,7 @@ import com.cadenassi.inventory_control.model.product.Category;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 public class ProductDTO implements Serializable {
@@ -17,6 +18,8 @@ public class ProductDTO implements Serializable {
     private Float price;
     private ClothingEnum clothing;
     private Category category;
+    private Date created;
+    private Date lastUpdate;
 
     public ProductDTO() {
     }
@@ -77,6 +80,22 @@ public class ProductDTO implements Serializable {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 
     @Override

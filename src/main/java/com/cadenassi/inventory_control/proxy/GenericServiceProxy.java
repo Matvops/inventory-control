@@ -7,7 +7,7 @@ import com.cadenassi.inventory_control.exceptions.ObjectIsNullException;
 public abstract class GenericServiceProxy {
 
     protected void verifyIsNumber(String number) {
-        if (!number.matches("^\\\\d+$"))
+        if (!number.matches("^[0-9]+$"))
             throw new InvalidArgumentException("Argument is not a number");
     }
 
