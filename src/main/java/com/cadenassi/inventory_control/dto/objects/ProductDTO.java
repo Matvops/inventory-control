@@ -4,6 +4,7 @@ import com.cadenassi.inventory_control.enums.CategoryEnum;
 import com.cadenassi.inventory_control.enums.ClothingEnum;
 import com.cadenassi.inventory_control.enums.MaterialEnum;
 import com.cadenassi.inventory_control.model.product.Category;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -29,6 +30,7 @@ public class ProductDTO implements Serializable {
         this.category = new Category(categoryEnum, materialEnum);
     }
 
+    @JsonIgnore
     public Long getId() {
         return id;
     }

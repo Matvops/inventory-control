@@ -6,8 +6,9 @@ import com.cadenassi.inventory_control.enums.CategoryEnum;
 import com.cadenassi.inventory_control.enums.ClothingEnum;
 import com.cadenassi.inventory_control.enums.MaterialEnum;
 import com.cadenassi.inventory_control.exceptions.ResourceNotFoundException;
-import com.cadenassi.inventory_control.model.product.Category;
 import com.cadenassi.inventory_control.repositories.ProductRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,8 @@ import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+
+    private static final Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
 
     @Autowired
     private ProductRepository repository;
@@ -24,13 +27,16 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDTO> getAllProducts(){
+        log.info("Get products from repository");
         var products = mapper.toListProductDTO(repository.findAll());
+
 
         return products;
     }
 
     @Override
     public ProductDTO getProductById(String id){
+        log.info("Get product from repository by id {}", id);
         var product = mapper.toProductDTO(repository.findById(Long.parseLong(id))
                 .orElseThrow(() -> new ResourceNotFoundException("ID not found!")));
 
@@ -39,6 +45,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDTO> getProductByName(String name){
+        log.info("Get product from repository by name {}", name);
         var product = mapper.toListProductDTO(repository.getProductByFilter("NAME", name));
 
 
@@ -48,6 +55,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDTO> getProductByCategory(CategoryEnum category, MaterialEnum material){
+        log.info("Get product from repository by category{} and material {}", category, material);
         List<ProductDTO> products = null;
 
         if(category != null && material != null){
@@ -74,6 +82,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDTO> getProductByClothing(ClothingEnum clothing){
+        log.info("Get product from repository by clothing {}", clothing);
         var products = mapper.toListProductDTO(repository.getProductByFilter("CLOTHING", clothing.toString()));
 
         return products;
@@ -81,6 +90,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDTO update(String id, ProductDTO product){
+        log.info("Update product by id {}", id);
         var originalProduct = repository.findById(Long.parseLong(id))
                 .orElseThrow(() -> new ResourceNotFoundException("ID not found!"));
 
