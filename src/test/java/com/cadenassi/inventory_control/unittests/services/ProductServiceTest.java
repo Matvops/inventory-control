@@ -164,7 +164,7 @@ public class ProductServiceTest {
                         && CategoryEnum.BLUSA.equals(x.getCategory().getCategory()))
                 .toList();
 
-        when(repository.getFilteredProductByCategory(CategoryEnum.BLUSA, MaterialEnum.ALGODAO))
+        when(repository.getFilteredProductByCategory(CategoryEnum.BLUSA.toString(), MaterialEnum.ALGODAO.toString()))
                 .thenReturn(products);
         when(mapper.toListProductDTO(products)).thenReturn(dtos);
 
@@ -173,7 +173,7 @@ public class ProductServiceTest {
         service.getProductByCategory(CategoryEnum.BLUSA, MaterialEnum.ALGODAO);
 
         //ASSERTIONS
-        verify(repository).getFilteredProductByCategory(eq(CategoryEnum.BLUSA), eq(MaterialEnum.ALGODAO));
+        verify(repository).getFilteredProductByCategory(eq(CategoryEnum.BLUSA.toString()), eq(MaterialEnum.ALGODAO.toString()));
     }
 
     @Test

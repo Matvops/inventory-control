@@ -4,6 +4,7 @@ import com.cadenassi.inventory_control.dto.objects.ProductDTO;
 import com.cadenassi.inventory_control.enums.CategoryEnum;
 import com.cadenassi.inventory_control.enums.ClothingEnum;
 import com.cadenassi.inventory_control.enums.MaterialEnum;
+import com.cadenassi.inventory_control.exceptions.ResourceNotFoundException;
 import com.cadenassi.inventory_control.proxy.GenericServiceProxy;
 import com.cadenassi.inventory_control.services.product.ProductService;
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -22,7 +24,7 @@ public class ProductServiceProxy extends GenericServiceProxy implements ProductS
     @Autowired
     private ProductService service;
 
-    public ProductServiceProxy(ProductService service){
+    public ProductServiceProxy(ProductService service) {
         this.service = service;
     }
 
@@ -50,19 +52,28 @@ public class ProductServiceProxy extends GenericServiceProxy implements ProductS
     }
 
     @Override
-    public List<ProductDTO> getProductByCategory(CategoryEnum category, MaterialEnum material) {
+    public <T, R> List<ProductDTO> getProductByCategory(T category, R material) {
         log.info("Apply validation of the getProductByCategory method on the category {} and material {}",
                 category, material);
-        verifyIsNull(category);
-        if(category == null && material == null)
+
+        if (category.toString().isBlank() && material.toString().isBlank())
             verifyIsNull(null);
 
+        var categoryString = category.toString().toUpperCase();
+        var materialString = material.toString().toUpperCase();
 
-        return service.getProductByCategory(category, material);
+        var containCat = Arrays.toString(CategoryEnum.values()).contains(categoryString);
+        var containMat = Arrays.toString(MaterialEnum.values()).contains(materialString);
+
+        if(!(containCat || containMat))
+            throw new ResourceNotFoundException(categoryString + " AND " + materialString + " NO EXISTS!");
+
+        return service.getProductByCategory(categoryString, materialString);
     }
 
+
     @Override
-    public List<ProductDTO> getProductByClothing(ClothingEnum clothing) {
+    public <T> List<ProductDTO> getProductByClothing(T clothing) {
         log.info("Apply validation of the getProductByClothing method on the clothing {}", clothing);
         verifyIsNull(clothing);
 

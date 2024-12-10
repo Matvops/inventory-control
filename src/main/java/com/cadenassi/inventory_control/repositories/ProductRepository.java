@@ -12,10 +12,10 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    @Procedure(name = "get_product_with_a_filter")
+    @Procedure(value = "get_product_with_a_filter")
     List<Product> getProductByFilter(@Param("field_filter") String field, @Param("filter_value")String value);
 
-    @Procedure(name = "get_product_by_filter_category")
-    List<Product> getFilteredProductByCategory(@Param("category") CategoryEnum categoryEnum,
-                                               @Param("material") MaterialEnum material);
+    @Procedure(value = "get_product_by_filter_category")
+    List<Product> getFilteredProductByCategory(@Param("category") String category,
+                                               @Param("material") String material);
 }

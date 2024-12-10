@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductMapper mapper;
 
+    @Transactional
     @Override
     public List<ProductDTO> getAllProducts(){
         log.info("Get products from repository");
@@ -34,6 +36,7 @@ public class ProductServiceImpl implements ProductService {
         return products;
     }
 
+    @Transactional
     @Override
     public ProductDTO getProductById(String id){
         log.info("Get product from repository by id {}", id);
@@ -43,6 +46,7 @@ public class ProductServiceImpl implements ProductService {
         return product;
     }
 
+    @Transactional
     @Override
     public List<ProductDTO> getProductByName(String name){
         log.info("Get product from repository by name {}", name);
@@ -52,36 +56,39 @@ public class ProductServiceImpl implements ProductService {
         return product;
     }
 
-
+    @Transactional
     @Override
-    public List<ProductDTO> getProductByCategory(CategoryEnum category, MaterialEnum material){
-        log.info("Get product from repository by category{} and material {}", category, material);
+    public <T, R> List<ProductDTO> getProductByCategory(T category, R material) {
+        log.info("Get product from repository by category {} and material {}", category, material);
         List<ProductDTO> products = null;
 
-        if(category != null && material != null){
+
+        if(category != "NULL" && material != "NULL"){
             products = mapper
                     .toListProductDTO(repository
-                            .getFilteredProductByCategory(category, material));
+                            .getFilteredProductByCategory(category.toString().toUpperCase(), material.toString().toUpperCase()));
 
             return products;
         }
 
-        if(category != null) {
+        if(category != "NULL") {
             products = mapper.toListProductDTO(repository
-                    .getProductByFilter("CATEGORY", category.toString()));
+                    .getProductByFilter("CATEGORY", category.toString().toUpperCase()));
         }
 
-        if(material != null){
-             products = mapper.toListProductDTO(repository
-                    .getProductByFilter("MATERIAL", material.toString()));
+        if(material != "NULL"){
+            products = mapper.toListProductDTO(repository
+                    .getProductByFilter("MATERIAL", material.toString().toUpperCase()));
         }
 
 
         return products;
     }
 
+
+    @Transactional
     @Override
-    public List<ProductDTO> getProductByClothing(ClothingEnum clothing){
+    public <T> List<ProductDTO> getProductByClothing(T clothing){
         log.info("Get product from repository by clothing {}", clothing);
         var products = mapper.toListProductDTO(repository.getProductByFilter("CLOTHING", clothing.toString()));
 
