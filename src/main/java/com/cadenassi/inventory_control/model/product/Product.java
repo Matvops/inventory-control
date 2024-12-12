@@ -1,7 +1,7 @@
 package com.cadenassi.inventory_control.model.product;
 
 import com.cadenassi.inventory_control.enums.CategoryEnum;
-import com.cadenassi.inventory_control.enums.ClothingEnum;
+import com.cadenassi.inventory_control.enums.BrandEnum;
 import com.cadenassi.inventory_control.enums.MaterialEnum;
 import com.cadenassi.inventory_control.model.transactions.purchase.PurchaseItem;
 import com.cadenassi.inventory_control.model.transactions.sale.SaleItem;
@@ -35,7 +35,7 @@ public class Product implements Serializable {
     private Date lastUpdate;
 
     @Enumerated(EnumType.STRING)
-    private ClothingEnum clothing;
+    private BrandEnum brand;
 
     @Embedded
     private Category category = new Category();
@@ -48,12 +48,12 @@ public class Product implements Serializable {
 
     public Product() {}
 
-    public Product(String name, Integer quantity, Float price, ClothingEnum clothing,
+    public Product(String name, Integer quantity, Float price, BrandEnum brand,
                    CategoryEnum category, MaterialEnum material) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
-        this.clothing = clothing;
+        this.brand = brand;
         setCategoryEnum(category);
         setMaterialEnum(material);
     }
@@ -113,12 +113,12 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public ClothingEnum getClothing() {
-        return clothing;
+    public BrandEnum getBrand() {
+        return brand;
     }
 
-    public void setClothing(ClothingEnum clothing) {
-        this.clothing = clothing;
+    public void setBrand(BrandEnum brand) {
+        this.brand = brand;
     }
 
     public Category getCategory() {

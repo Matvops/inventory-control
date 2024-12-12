@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public enum ClothingEnum {
+public enum BrandEnum {
     ADIDAS,
     CALVIN_KLEIN,
     CONVERSE,
@@ -22,9 +22,9 @@ public enum ClothingEnum {
     QUICK_SILVER,
     TOMMY_HILFIGER;
 
-    public static ClothingEnum getClothing(int i){
-        List<ClothingEnum> clothingEnums = new ArrayList<>(Arrays.asList(ClothingEnum.values()));
+    public static BrandEnum getClothing(int i){
+        List<BrandEnum> brandEnums = new ArrayList<>(Arrays.asList(BrandEnum.values()));
 
-        return clothingEnums.get(i);
+        return brandEnums.get(i);
     }
 }

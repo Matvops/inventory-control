@@ -2,7 +2,7 @@ package com.cadenassi.inventory_control.unittests.mocks;
 
 import com.cadenassi.inventory_control.dto.objects.ProductDTO;
 import com.cadenassi.inventory_control.enums.CategoryEnum;
-import com.cadenassi.inventory_control.enums.ClothingEnum;
+import com.cadenassi.inventory_control.enums.BrandEnum;
 import com.cadenassi.inventory_control.enums.MaterialEnum;
 import com.cadenassi.inventory_control.model.product.Category;
 import com.cadenassi.inventory_control.model.product.Product;
@@ -27,7 +27,7 @@ public class MockProduct {
         product.setName("PRODUCT"+id);
         product.setPrice(10.0f * id);
         product.setQuantity(10 * id);
-        product.setClothing(ClothingEnum.getClothing(id));
+        product.setBrand(BrandEnum.getClothing(id));
         product.setCategoryEnum(CategoryEnum.getCategory(id));
         product.setMaterialEnum(MaterialEnum.getMaterial(id));
 
@@ -39,7 +39,7 @@ public class MockProduct {
         product.setName("PRODUCT"+id);
         product.setPrice(10.0f * id);
         product.setQuantity(10 * id);
-        product.setClothing(ClothingEnum.getClothing(id));
+        product.setBrand(BrandEnum.getClothing(id));
         product.setCategory(new Category(CategoryEnum.getCategory(id), MaterialEnum.getMaterial(id)));
 
         return product;
@@ -50,7 +50,7 @@ public class MockProduct {
 
         for (int i = 0; i < 10; i++){
             products.add(new Product("PRODUCT"+i, 10 * i, 10f * i,
-                    ClothingEnum.getClothing(i), CategoryEnum.getCategory(i), MaterialEnum.getMaterial(i)));
+                    BrandEnum.getClothing(i), CategoryEnum.getCategory(i), MaterialEnum.getMaterial(i)));
         }
 
         return products;
@@ -61,7 +61,7 @@ public class MockProduct {
 
         for (int i = 0; i < 10; i++){
             products.add(new ProductDTO("PRODUCT"+i, 10 * i, 10f * i,
-                    ClothingEnum.getClothing(i), CategoryEnum.getCategory(i), MaterialEnum.getMaterial(i)));
+                    BrandEnum.getClothing(i), CategoryEnum.getCategory(i), MaterialEnum.getMaterial(i)));
         }
 
         return products;

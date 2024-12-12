@@ -3,7 +3,7 @@ package com.cadenassi.inventory_control.unittests.services;
 import com.cadenassi.inventory_control.dto.mappers.ProductMapper;
 import com.cadenassi.inventory_control.dto.objects.ProductDTO;
 import com.cadenassi.inventory_control.enums.CategoryEnum;
-import com.cadenassi.inventory_control.enums.ClothingEnum;
+import com.cadenassi.inventory_control.enums.BrandEnum;
 import com.cadenassi.inventory_control.enums.MaterialEnum;
 import com.cadenassi.inventory_control.repositories.ProductRepository;
 import com.cadenassi.inventory_control.services.product.ProductServiceImpl;
@@ -12,7 +12,6 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -60,7 +59,7 @@ public class ProductServiceTest {
             assertEquals(result.get(i).getName(), dtos.get(i).getName());
             assertEquals(result.get(i).getQuantity(), dtos.get(i).getQuantity());
             assertEquals(result.get(i).getPrice(), dtos.get(i).getPrice());
-            assertEquals(result.get(i).getClothing(), dtos.get(i).getClothing());
+            assertEquals(result.get(i).getBrand(), dtos.get(i).getBrand());
         }
 
         verify(repository, times(1)).findAll();
@@ -121,27 +120,27 @@ public class ProductServiceTest {
         var products = MockProductSingleton.getInstance()
                 .getProducts()
                 .stream()
-                .filter(x -> x.getClothing().equals(ClothingEnum.getClothing(0)))
+                .filter(x -> x.getBrand().equals(BrandEnum.getClothing(0)))
                 .toList();
 
 
         var dtos = MockProductSingleton.getInstance().getDtos()
                 .stream()
-                .filter(x -> x.getClothing().equals(ClothingEnum.getClothing(0)))
+                .filter(x -> x.getBrand().equals(BrandEnum.getClothing(0)))
                 .toList();
 
-        when(repository.getProductByFilter("CLOTHING", ClothingEnum.getClothing(0).toString()))
+        when(repository.getProductByFilter("CLOTHING", BrandEnum.getClothing(0).toString()))
                 .thenReturn(products);
 
         when(mapper.toListProductDTO(products)).thenReturn(dtos);
 
 
         //ACT
-        service.getProductByClothing(ClothingEnum.getClothing(0));
+        service.getProductByBrand(BrandEnum.getClothing(0));
 
         //ASSERTIONS
         verify(repository, times(1))
-                .getProductByFilter(eq("CLOTHING"), eq(ClothingEnum.getClothing(0).toString()));
+                .getProductByFilter(eq("CLOTHING"), eq(BrandEnum.getClothing(0).toString()));
 
         verify(mapper).toListProductDTO(eq(products));
     }

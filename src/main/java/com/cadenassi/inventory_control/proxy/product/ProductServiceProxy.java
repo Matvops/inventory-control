@@ -2,7 +2,7 @@ package com.cadenassi.inventory_control.proxy.product;
 
 import com.cadenassi.inventory_control.dto.objects.ProductDTO;
 import com.cadenassi.inventory_control.enums.CategoryEnum;
-import com.cadenassi.inventory_control.enums.ClothingEnum;
+import com.cadenassi.inventory_control.enums.BrandEnum;
 import com.cadenassi.inventory_control.enums.MaterialEnum;
 import com.cadenassi.inventory_control.exceptions.ResourceNotFoundException;
 import com.cadenassi.inventory_control.proxy.GenericServiceProxy;
@@ -73,11 +73,14 @@ public class ProductServiceProxy extends GenericServiceProxy implements ProductS
 
 
     @Override
-    public <T> List<ProductDTO> getProductByClothing(T clothing) {
-        log.info("Apply validation of the getProductByClothing method on the clothing {}", clothing);
-        verifyIsNull(clothing);
+    public <T> List<ProductDTO> getProductByBrand(T brand) {
+        log.info("Apply validation of the getProductByBrand method on the brand {}", brand);
+        verifyIsNull(brand);
+        if(!Arrays.toString(BrandEnum.values()).contains(brand.toString().toUpperCase())){
+            throw new ResourceNotFoundException("BRAND: " + brand + " NO EXISTS!");
+        }
 
-        return service.getProductByClothing(clothing);
+        return service.getProductByBrand(brand);
     }
 
     @Override

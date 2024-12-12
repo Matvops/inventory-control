@@ -1,7 +1,7 @@
 package com.cadenassi.inventory_control.dto.objects;
 
 import com.cadenassi.inventory_control.enums.CategoryEnum;
-import com.cadenassi.inventory_control.enums.ClothingEnum;
+import com.cadenassi.inventory_control.enums.BrandEnum;
 import com.cadenassi.inventory_control.enums.MaterialEnum;
 import com.cadenassi.inventory_control.model.product.Category;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -16,7 +16,7 @@ public class ProductDTO implements Serializable {
     private String name;
     private Integer quantity;
     private Float price;
-    private ClothingEnum clothing;
+    private BrandEnum brand;
     private Category category;
     private Date created;
     private Date lastUpdate;
@@ -24,12 +24,12 @@ public class ProductDTO implements Serializable {
     public ProductDTO() {
     }
 
-    public ProductDTO(String name, Integer quantity, Float price, ClothingEnum clothing,
+    public ProductDTO(String name, Integer quantity, Float price, BrandEnum brand,
                       CategoryEnum categoryEnum, MaterialEnum materialEnum) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
-        this.clothing = clothing;
+        this.brand = brand;
         this.category = new Category(categoryEnum, materialEnum);
     }
 
@@ -66,12 +66,12 @@ public class ProductDTO implements Serializable {
         this.price = price;
     }
 
-    public ClothingEnum getClothing() {
-        return clothing;
+    public BrandEnum getBrand() {
+        return brand;
     }
 
-    public void setClothing(ClothingEnum clothing) {
-        this.clothing = clothing;
+    public void setBrand(BrandEnum brand) {
+        this.brand = brand;
     }
 
     public Category getCategory() {

@@ -2,9 +2,6 @@ package com.cadenassi.inventory_control.services.product;
 
 import com.cadenassi.inventory_control.dto.mappers.ProductMapper;
 import com.cadenassi.inventory_control.dto.objects.ProductDTO;
-import com.cadenassi.inventory_control.enums.CategoryEnum;
-import com.cadenassi.inventory_control.enums.ClothingEnum;
-import com.cadenassi.inventory_control.enums.MaterialEnum;
 import com.cadenassi.inventory_control.exceptions.ResourceNotFoundException;
 import com.cadenassi.inventory_control.repositories.ProductRepository;
 import org.slf4j.Logger;
@@ -62,8 +59,10 @@ public class ProductServiceImpl implements ProductService {
         log.info("Get product from repository by category {} and material {}", category, material);
         List<ProductDTO> products = null;
 
+        var categoryBool = category.toString().isBlank();
+        var materialBool = material.toString().isBlank();
 
-        if(category != "NULL" && material != "NULL"){
+        if((!categoryBool) && (!materialBool)){
             products = mapper
                     .toListProductDTO(repository
                             .getFilteredProductByCategory(category.toString().toUpperCase(), material.toString().toUpperCase()));
@@ -71,12 +70,12 @@ public class ProductServiceImpl implements ProductService {
             return products;
         }
 
-        if(category != "NULL") {
+        if(!categoryBool) {
             products = mapper.toListProductDTO(repository
                     .getProductByFilter("CATEGORY", category.toString().toUpperCase()));
         }
 
-        if(material != "NULL"){
+        if(!materialBool){
             products = mapper.toListProductDTO(repository
                     .getProductByFilter("MATERIAL", material.toString().toUpperCase()));
         }
@@ -88,9 +87,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Transactional
     @Override
-    public <T> List<ProductDTO> getProductByClothing(T clothing){
-        log.info("Get product from repository by clothing {}", clothing);
-        var products = mapper.toListProductDTO(repository.getProductByFilter("CLOTHING", clothing.toString()));
+    public <T> List<ProductDTO> getProductByBrand(T brand){
+        log.info("Get product from repository by brand {}", brand);
+        var products = mapper.toListProductDTO(repository.getProductByFilter("BRAND", brand.toString()));
 
         return products;
     }
@@ -103,7 +102,7 @@ public class ProductServiceImpl implements ProductService {
 
         originalProduct.setName(product.getName());
         originalProduct.setCategory(product.getCategory());
-        originalProduct.setClothing(product.getClothing());
+        originalProduct.setBrand(product.getBrand());
         originalProduct.setQuantity(product.getQuantity());
         originalProduct.setPrice(product.getPrice());
 
