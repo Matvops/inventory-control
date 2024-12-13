@@ -1,19 +1,21 @@
 package com.cadenassi.inventory_control.dto.objects;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+
 import java.io.Serializable;
 import java.util.Date;
 
-public class EmployeeDTO implements Serializable {
+public class PersonDTO implements Serializable {
     private String cpf;
     private String name;
     private String phoneNumber;
     private Date created;
     private Date lastUpdate;
 
-    public EmployeeDTO() {
-    }
+    public PersonDTO() {}
 
-    public EmployeeDTO(String cpf, String name, String phoneNumber, Date created, Date lastUpdate) {
+    public PersonDTO(String cpf, String name, String phoneNumber, Date created, Date lastUpdate) {
         this.cpf = cpf;
         this.name = name;
         this.phoneNumber = phoneNumber;
