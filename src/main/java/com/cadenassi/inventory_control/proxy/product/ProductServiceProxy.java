@@ -56,8 +56,9 @@ public class ProductServiceProxy extends GenericServiceProxy implements ProductS
         log.info("Apply validation of the getProductByCategory method on the category {} and material {}",
                 category, material);
 
-        if (category.toString().isBlank() && material.toString().isBlank())
+        if (category.toString().isBlank() && material.toString().isBlank()) {
             verifyIsNull(null);
+        }
 
         var categoryString = category.toString().toUpperCase();
         var materialString = material.toString().toUpperCase();

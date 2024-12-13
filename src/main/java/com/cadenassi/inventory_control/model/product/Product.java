@@ -78,11 +78,15 @@ public class Product implements Serializable {
     }
 
     public void setCategoryEnum(CategoryEnum category) {
-        this.category.setCategory(category);
+        if(category != null){
+            this.category.setCategory(category);
+        }
     }
 
     public void setMaterialEnum(MaterialEnum material) {
-        this.category.setMaterial(material);
+        if(material != null) {
+            this.category.setMaterial(material);
+        }
     }
 
     public Long getId() {
@@ -94,7 +98,9 @@ public class Product implements Serializable {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if(name != null){
+            this.name = name;
+        }
     }
 
     public Integer getQuantity() {
@@ -102,7 +108,9 @@ public class Product implements Serializable {
     }
 
     public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+        if(quantity != null){
+            this.quantity = quantity;
+        }
     }
 
     public Float getPrice() {
@@ -110,7 +118,9 @@ public class Product implements Serializable {
     }
 
     public void setPrice(Float price) {
-        this.price = price;
+        if(price != null){
+            this.price = price;
+        }
     }
 
     public BrandEnum getBrand() {
@@ -118,7 +128,9 @@ public class Product implements Serializable {
     }
 
     public void setBrand(BrandEnum brand) {
-        this.brand = brand;
+        if(brand != null){
+            this.brand = brand;
+        }
     }
 
     public Category getCategory() {
@@ -126,7 +138,9 @@ public class Product implements Serializable {
     }
 
     public void setCategory(Category category) {
-        this.category = category;
+        if(category != null){
+            this.category = category;
+        }
     }
 
     public Date getCreated() {
