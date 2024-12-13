@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tb_purchase_product")
+@Table(name = "purchase_product")
 public class PurchaseItem implements Serializable {
 
     @EmbeddedId
