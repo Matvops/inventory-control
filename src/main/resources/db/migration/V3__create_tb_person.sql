@@ -1,6 +1,6 @@
 CREATE TABLE `person` (
-  `type` varchar(31) NOT NULL,
-  `cpf` varchar(255) NOT NULL,
+  `type` varchar(30) NOT NULL,
+  `cpf` char(11) NOT NULL,
   `created` datetime(6) DEFAULT NULL,
   `last_update` datetime(6) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
