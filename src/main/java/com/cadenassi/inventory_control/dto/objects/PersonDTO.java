@@ -15,12 +15,10 @@ public class PersonDTO implements Serializable {
 
     public PersonDTO() {}
 
-    public PersonDTO(String cpf, String name, String phoneNumber, Date created, Date lastUpdate) {
+    public PersonDTO(String cpf, String name, String phoneNumber) {
         this.cpf = cpf;
         this.name = name;
         this.phoneNumber = phoneNumber;
-        this.created = created;
-        this.lastUpdate = lastUpdate;
     }
 
     public String getCpf() {

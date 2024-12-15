@@ -14,6 +14,10 @@ public class Client extends Person{
     @OneToMany(mappedBy = "client")
     private Set<Sale> sales = new HashSet<>();
 
+    public Client() {
+        super();
+    }
+
     public Client(String CPF, String name, String phoneNumber) {
         super(CPF, name, phoneNumber);
     }
