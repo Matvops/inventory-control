@@ -20,15 +20,12 @@ public interface PersonMapper {
 
     Client toClient(PersonDTO dto);
 
-    PersonDTO toPersonDTO(Employee person);
-
     PersonDTO toPersonDTO(Person person);
 
     List<Employee> toListEmployee(PersonDTO... dtos);
 
     List<Client> toListClient(PersonDTO... dtos);
 
-    List<PersonDTO> toListPersonDTO(Employee... persons);
+    List<PersonDTO> toListPersonDTO(Person... persons);
 
-    List<PersonDTO> toListPersonDTO(Client... persons);
 }
