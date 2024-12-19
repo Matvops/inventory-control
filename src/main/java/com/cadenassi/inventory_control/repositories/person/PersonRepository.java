@@ -1,8 +1,8 @@
 package com.cadenassi.inventory_control.repositories.person;
 
+import com.cadenassi.inventory_control.model.person.Client;
+import com.cadenassi.inventory_control.model.person.Employee;
 import com.cadenassi.inventory_control.model.person.Person;
-import com.cadenassi.inventory_control.model.product.Product;
-import org.hibernate.annotations.View;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
@@ -15,11 +15,14 @@ import java.util.List;
 public interface PersonRepository extends JpaRepository<Person, String> {
 
     @Query(value = "SELECT * FROM vw_employee", nativeQuery = true)
-    List<Product> getAllEmployees();
+    List<Employee> getAllEmployees();
 
     @Query(value = "SELECT * FROM vw_client", nativeQuery = true)
-    List<Product> getAllClients();
+    List<Client> getAllClients();
 
     @Procedure(procedureName = "get_person_by_name")
-    List<Product> getPersonByName(@Param("name") String name, @Param("type") String type);
+    List<? extends Person> getPersonByName(@Param("name") String name, @Param("type") String type);
+
+    @Procedure(procedureName = "get_person_by_cpf")
+    <T extends Person> T getPersonByCpf(@Param("cpf") String cpf, @Param("type") String type);
 }
