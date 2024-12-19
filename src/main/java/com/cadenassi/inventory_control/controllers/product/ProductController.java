@@ -1,14 +1,11 @@
-package com.cadenassi.inventory_control.controllers;
+package com.cadenassi.inventory_control.controllers.product;
 
 import com.cadenassi.inventory_control.dto.objects.ProductDTO;
-import com.cadenassi.inventory_control.enums.CategoryEnum;
-import com.cadenassi.inventory_control.enums.MaterialEnum;
 import com.cadenassi.inventory_control.proxy.product.ProductServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

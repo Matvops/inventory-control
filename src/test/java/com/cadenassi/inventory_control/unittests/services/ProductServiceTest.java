@@ -7,7 +7,7 @@ import com.cadenassi.inventory_control.enums.BrandEnum;
 import com.cadenassi.inventory_control.enums.MaterialEnum;
 import com.cadenassi.inventory_control.repositories.ProductRepository;
 import com.cadenassi.inventory_control.services.product.ProductServiceImpl;
-import com.cadenassi.inventory_control.unittests.mocks.MockProductSingleton;
+import com.cadenassi.inventory_control.unittests.mocks.product.MockProductSingleton;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
