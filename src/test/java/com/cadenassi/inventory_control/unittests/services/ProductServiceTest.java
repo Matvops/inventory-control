@@ -129,7 +129,7 @@ public class ProductServiceTest {
                 .filter(x -> x.getBrand().equals(BrandEnum.getClothing(0)))
                 .toList();
 
-        when(repository.getProductByFilter("CLOTHING", BrandEnum.getClothing(0).toString()))
+        when(repository.getProductByFilter("BRAND", BrandEnum.getClothing(0).toString()))
                 .thenReturn(products);
 
         when(mapper.toListProductDTO(products)).thenReturn(dtos);
@@ -140,7 +140,7 @@ public class ProductServiceTest {
 
         //ASSERTIONS
         verify(repository, times(1))
-                .getProductByFilter(eq("CLOTHING"), eq(BrandEnum.getClothing(0).toString()));
+                .getProductByFilter(eq("BRAND"), eq(BrandEnum.getClothing(0).toString()));
 
         verify(mapper).toListProductDTO(eq(products));
     }

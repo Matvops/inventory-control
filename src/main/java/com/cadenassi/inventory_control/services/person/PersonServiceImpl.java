@@ -30,6 +30,7 @@ public class PersonServiceImpl implements PersonService{
     @Override
     public List<PersonDTO> getAllEmployees() {
         log.info("Get all employees on PersonService");
+
         var employees = mapper.toListPersonDTO(repository.getAllEmployees().toArray(new Employee[0]));
 
         return employees;
@@ -38,6 +39,7 @@ public class PersonServiceImpl implements PersonService{
     @Override
     public List<PersonDTO> getAllClients() {
         log.info("Get all clients on PersonService");
+
         var clients = mapper.toListPersonDTO(repository.getAllClients().toArray(new Client[0]));
 
         return clients;
@@ -46,14 +48,23 @@ public class PersonServiceImpl implements PersonService{
     @Override
     public PersonDTO getPersonByCpf(String cpf, String type) {
         log.info("Get person by cpf on PersonService");
-        var person = mapper.toPersonDTO(repository.getPersonByCpf(cpf, type));
 
-        return person;
+        var person = repository.getPersonByCpf(cpf, type);
+
+        if(person == null) {
+            throw new ResourceNotFoundException("PERSON WITH CPF INFORMED NOT FOUND!");
+        }
+
+        var dto = mapper.toPersonDTO(person);
+
+
+        return dto;
     }
 
     @Override
     public List<PersonDTO> getPersonByName(String name, String type) {
         log.info("Get person by name on PersonService");
+
         List<PersonDTO> dtos = new ArrayList<>();
 
         var persons = repository.getPersonByName(name, type);
@@ -68,6 +79,9 @@ public class PersonServiceImpl implements PersonService{
             dtos.addAll(mapper.toListPersonDTO(persons.toArray(new Employee[0])));
         }
 
+        if(dtos.isEmpty()) {
+            throw new ResourceNotFoundException("PERSON WITH NAME " + name +  " NOT FOUND!");
+        }
         return dtos;
     }
 
