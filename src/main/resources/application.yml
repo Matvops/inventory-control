@@ -16,3 +16,7 @@ spring:
   flyway:
     enabled: true
     baseline-on-migrate: true
+springdoc:
+  pathsToMatch: /**
+  swagger-ui:
+    use-root-path: true
