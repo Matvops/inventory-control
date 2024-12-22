@@ -79,9 +79,6 @@ public class PersonServiceImpl implements PersonService{
             dtos.addAll(mapper.toListPersonDTO(persons.toArray(new Employee[0])));
         }
 
-        if(dtos.isEmpty()) {
-            throw new ResourceNotFoundException("PERSON WITH NAME " + name +  " NOT FOUND!");
-        }
         return dtos;
     }
 
