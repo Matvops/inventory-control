@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.*;
 
 @Entity
@@ -29,10 +30,10 @@ public class Product implements Serializable {
     private Float price;
 
     @Column
-    private Date created;
+    private Instant created;
 
     @Column(name = "last_update")
-    private Date lastUpdate;
+    private Instant lastUpdate;
 
     @Enumerated(EnumType.STRING)
     private BrandEnum brand;
@@ -60,13 +61,13 @@ public class Product implements Serializable {
 
     @PrePersist
     private void onCreate(){
-        this.created = new Date();
-        this.lastUpdate = new Date();
+        this.created = Instant.now();
+        this.lastUpdate = Instant.now();
     }
 
     @PreUpdate
     private void onUpdate(){
-        this.lastUpdate = new Date();
+        this.lastUpdate = Instant.now();
     }
 
     public CategoryEnum getCategoryEnum() {
@@ -143,19 +144,19 @@ public class Product implements Serializable {
         }
     }
 
-    public Date getCreated() {
+    public Instant getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(Instant created) {
         this.created = created;
     }
 
-    public Date getLastUpdate() {
+    public Instant getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Date lastUpdate) {
+    public void setLastUpdate(Instant lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 

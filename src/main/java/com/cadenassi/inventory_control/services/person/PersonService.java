@@ -1,6 +1,6 @@
 package com.cadenassi.inventory_control.services.person;
 
-import com.cadenassi.inventory_control.dto.objects.PersonDTO;
+import com.cadenassi.inventory_control.dto.objects.person.PersonDTO;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.cadenassi.inventory_control.services.product;
 
 import com.cadenassi.inventory_control.dto.mappers.ProductMapper;
-import com.cadenassi.inventory_control.dto.objects.ProductDTO;
+import com.cadenassi.inventory_control.dto.objects.product.ProductDTO;
 import com.cadenassi.inventory_control.exceptions.ResourceNotFoundException;
 import com.cadenassi.inventory_control.repositories.ProductRepository;
 import org.slf4j.Logger;

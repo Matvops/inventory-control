@@ -1,8 +1,7 @@
 package com.cadenassi.inventory_control.unittests.services;
 
 import com.cadenassi.inventory_control.dto.mappers.PersonMapper;
-import com.cadenassi.inventory_control.dto.objects.PersonDTO;
-import com.cadenassi.inventory_control.model.person.Client;
+import com.cadenassi.inventory_control.dto.objects.person.PersonDTO;
 import com.cadenassi.inventory_control.model.person.Employee;
 import com.cadenassi.inventory_control.model.person.Person;
 import com.cadenassi.inventory_control.repositories.person.PersonRepository;
@@ -16,7 +15,6 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;

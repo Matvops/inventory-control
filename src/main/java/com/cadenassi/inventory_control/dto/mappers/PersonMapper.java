@@ -1,8 +1,6 @@
 package com.cadenassi.inventory_control.dto.mappers;
 
-import com.cadenassi.inventory_control.dto.objects.ClientDTO;
-import com.cadenassi.inventory_control.dto.objects.EmployeeDTO;
-import com.cadenassi.inventory_control.dto.objects.PersonDTO;
+import com.cadenassi.inventory_control.dto.objects.person.PersonDTO;
 import com.cadenassi.inventory_control.model.person.Client;
 import com.cadenassi.inventory_control.model.person.Employee;
 import com.cadenassi.inventory_control.model.person.Person;

@@ -1,7 +1,7 @@
 package com.cadenassi.inventory_control.unittests.services;
 
 import com.cadenassi.inventory_control.dto.mappers.ProductMapper;
-import com.cadenassi.inventory_control.dto.objects.ProductDTO;
+import com.cadenassi.inventory_control.dto.objects.product.ProductDTO;
 import com.cadenassi.inventory_control.enums.CategoryEnum;
 import com.cadenassi.inventory_control.enums.BrandEnum;
 import com.cadenassi.inventory_control.enums.MaterialEnum;

@@ -1,6 +1,6 @@
 package com.cadenassi.inventory_control.proxy.person;
 
-import com.cadenassi.inventory_control.dto.objects.PersonDTO;
+import com.cadenassi.inventory_control.dto.objects.person.PersonDTO;
 import com.cadenassi.inventory_control.exceptions.InvalidArgumentException;
 import com.cadenassi.inventory_control.exceptions.ResourceNotFoundException;
 import com.cadenassi.inventory_control.proxy.GenericServiceProxy;

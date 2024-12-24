@@ -1,6 +1,6 @@
 package com.cadenassi.inventory_control.controllers.person;
 
-import com.cadenassi.inventory_control.dto.objects.PersonDTO;
+import com.cadenassi.inventory_control.dto.objects.person.PersonDTO;
 import com.cadenassi.inventory_control.proxy.person.PersonProxy;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.tags.Tags;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +26,7 @@ public class PersonController {
     private PersonProxy proxy;
 
 
-    @GetMapping(value = "/employee/all", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(value = "/employee", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @Tag(name = "Employees", description = "EMPLOYEE CONTROLLER")
     @Operation(summary = "GET ALL EMPLOYEES", description = "METHOD TO GET ALL EMPLOYEES", responses = {
             @ApiResponse(responseCode = "200", description = "SUCCESS"
@@ -40,7 +39,7 @@ public class PersonController {
     }
 
 
-    @GetMapping(value = "/client/all", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(value = "/client", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @Tag(name = "Clients", description = "Clients Controller")
     @Operation(summary = "GET ALL CLIENTS", description = "METHOD TO GET ALL CLIENTS", responses = {
             @ApiResponse(responseCode = "200", description = "SUCCESS"

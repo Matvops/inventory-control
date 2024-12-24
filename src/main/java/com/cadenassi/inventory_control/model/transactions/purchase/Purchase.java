@@ -1,9 +1,11 @@
 package com.cadenassi.inventory_control.model.transactions.purchase;
 
 import com.cadenassi.inventory_control.model.person.Employee;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
@@ -24,30 +26,32 @@ public class Purchase implements Serializable {
     private String description;
 
     @Column
-    private Date created;
+    private Instant created;
 
     @Column(name = "last_update")
-    private Date lastUpdate;
+    private Instant lastUpdate;
 
     @OneToMany(mappedBy = "id.purchase")
     private final Set<PurchaseItem> items = new HashSet<>();
 
-    public Purchase() {}
+    public Purchase() {
+        total();
+    }
 
-    public Purchase(String description, Float price) {
+    public Purchase(String description) {
         this.description = description;
-        this.price = price;
+        total();
     }
 
     @PrePersist
     private void onCreate(){
-        this.created = new Date();
-        this.lastUpdate = new Date();
+        this.created = Instant.now();
+        this.lastUpdate = Instant.now();
     }
 
     @PreUpdate
     private void onUpdate(){
-        this.lastUpdate = new Date();
+        this.lastUpdate = Instant.now();
     }
 
     public void total(){
@@ -78,19 +82,19 @@ public class Purchase implements Serializable {
         return items;
     }
 
-    public Date getCreated() {
+    public Instant getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(Instant created) {
         this.created = created;
     }
 
-    public Date getLastUpdate() {
+    public Instant getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Date lastUpdate) {
+    public void setLastUpdate(Instant lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 

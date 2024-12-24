@@ -1,24 +1,25 @@
-package com.cadenassi.inventory_control.dto.objects;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
+package com.cadenassi.inventory_control.dto.objects.person;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 
-public class PersonDTO implements Serializable {
+public class ClientDTO implements Serializable {
     private String cpf;
     private String name;
     private String phoneNumber;
-    private Date created;
-    private Date lastUpdate;
+    private Instant created;
+    private Instant lastUpdate;
 
-    public PersonDTO() {}
+    public ClientDTO() {
+    }
 
-    public PersonDTO(String cpf, String name, String phoneNumber) {
+    public ClientDTO(String cpf, String name, String phoneNumber, Instant created, Instant lastUpdate) {
         this.cpf = cpf;
         this.name = name;
         this.phoneNumber = phoneNumber;
+        this.created = created;
+        this.lastUpdate = lastUpdate;
     }
 
     public String getCpf() {
@@ -45,19 +46,19 @@ public class PersonDTO implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public Date getCreated() {
+    public Instant getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(Instant created) {
         this.created = created;
     }
 
-    public Date getLastUpdate() {
+    public Instant getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Date lastUpdate) {
+    public void setLastUpdate(Instant lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 }

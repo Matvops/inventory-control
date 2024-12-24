@@ -1,6 +1,6 @@
 package com.cadenassi.inventory_control.controllers.product;
 
-import com.cadenassi.inventory_control.dto.objects.ProductDTO;
+import com.cadenassi.inventory_control.dto.objects.product.ProductDTO;
 import com.cadenassi.inventory_control.proxy.product.ProductServiceProxy;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

@@ -1,6 +1,6 @@
 package com.cadenassi.inventory_control.unittests.mocks.product;
 
-import com.cadenassi.inventory_control.dto.objects.ProductDTO;
+import com.cadenassi.inventory_control.dto.objects.product.ProductDTO;
 import com.cadenassi.inventory_control.enums.CategoryEnum;
 import com.cadenassi.inventory_control.enums.BrandEnum;
 import com.cadenassi.inventory_control.enums.MaterialEnum;

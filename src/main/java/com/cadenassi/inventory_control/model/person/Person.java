@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
@@ -25,10 +26,10 @@ public abstract class Person implements Serializable {
     private String phoneNumber;
 
     @Column
-    private Date created;
+    private Instant created;
 
     @Column(name = "last_update")
-    private Date lastUpdate;
+    private Instant lastUpdate;
 
     public Person() {
     }
@@ -41,13 +42,13 @@ public abstract class Person implements Serializable {
 
     @PrePersist
     private void onCreate(){
-        this.created = new Date();
-        this.lastUpdate = new Date();
+        this.created = Instant.now();
+        this.lastUpdate = Instant.now();
     }
 
     @PreUpdate
     private void onUpdate(){
-        this.lastUpdate = new Date();
+        this.lastUpdate = Instant.now();
     }
 
     public abstract Set<Sale> getSales();
@@ -76,19 +77,19 @@ public abstract class Person implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public Date getCreated() {
+    public Instant getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(Instant created) {
         this.created = created;
     }
 
-    public Date getLastUpdate() {
+    public Instant getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Date lastUpdate) {
+    public void setLastUpdate(Instant lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 

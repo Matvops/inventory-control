@@ -1,6 +1,6 @@
 package com.cadenassi.inventory_control.services.product;
 
-import com.cadenassi.inventory_control.dto.objects.ProductDTO;
+import com.cadenassi.inventory_control.dto.objects.product.ProductDTO;
 
 import java.util.List;
 

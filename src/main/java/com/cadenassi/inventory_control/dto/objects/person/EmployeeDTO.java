@@ -1,19 +1,20 @@
-package com.cadenassi.inventory_control.dto.objects;
+package com.cadenassi.inventory_control.dto.objects.person;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 
 public class EmployeeDTO implements Serializable {
     private String cpf;
     private String name;
     private String phoneNumber;
-    private Date created;
-    private Date lastUpdate;
+    private Instant created;
+    private Instant lastUpdate;
 
     public EmployeeDTO() {
     }
 
-    public EmployeeDTO(String cpf, String name, String phoneNumber, Date created, Date lastUpdate) {
+    public EmployeeDTO(String cpf, String name, String phoneNumber, Instant created, Instant lastUpdate) {
         this.cpf = cpf;
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -45,19 +46,19 @@ public class EmployeeDTO implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public Date getCreated() {
+    public Instant getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(Instant created) {
         this.created = created;
     }
 
-    public Date getLastUpdate() {
+    public Instant getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Date lastUpdate) {
+    public void setLastUpdate(Instant lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 }

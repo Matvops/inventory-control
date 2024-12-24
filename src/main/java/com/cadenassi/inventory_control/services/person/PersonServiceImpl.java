@@ -1,7 +1,7 @@
 package com.cadenassi.inventory_control.services.person;
 
 import com.cadenassi.inventory_control.dto.mappers.PersonMapper;
-import com.cadenassi.inventory_control.dto.objects.PersonDTO;
+import com.cadenassi.inventory_control.dto.objects.person.PersonDTO;
 import com.cadenassi.inventory_control.exceptions.ResourceNotFoundException;
 import com.cadenassi.inventory_control.model.person.Client;
 import com.cadenassi.inventory_control.model.person.Employee;

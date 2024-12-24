@@ -7,6 +7,7 @@ import com.cadenassi.inventory_control.model.person.Employee;
 import com.cadenassi.inventory_control.model.transactions.payment.Payment;
 import jakarta.persistence.*;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
@@ -26,17 +27,14 @@ public class Sale{
     @Column(nullable = false)
     private String observations;
 
-    @Column(nullable = false)
-    private Date date;
-
     @Column
     private boolean paid;
 
     @Column
-    private Date created;
+    private Instant created;
 
     @Column(name = "last_update")
-    private Date lastUpdate;
+    private Instant lastUpdate;
 
     @ManyToOne
     @JoinColumn(name = "payment_id")
@@ -53,9 +51,8 @@ public class Sale{
     @JoinColumn(name = "client_id")
     private Client client;
 
-    public Sale(Payment payment, float price, Date date, String observations, boolean paid) {
+    public Sale(Payment payment, float price, String observations, boolean paid) {
         this.price = price;
-        this.date = date;
         this.observations = observations;
         this.payment = payment;
         setPaid(paid);
@@ -63,13 +60,13 @@ public class Sale{
 
     @PrePersist
     private void onCreate(){
-        this.created = new Date();
-        this.lastUpdate = new Date();
+        this.created = Instant.now();
+        this.lastUpdate = Instant.now();
     }
 
     @PreUpdate
     private void onUpdate(){
-        this.lastUpdate = new Date();
+        this.lastUpdate = Instant.now();
     }
 
     public void total(){
@@ -94,14 +91,6 @@ public class Sale{
 
     public void setObservations(String observations) {
         this.observations = observations;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public Payment getPayment() {
@@ -145,19 +134,19 @@ public class Sale{
         this.paid = true;
     }
 
-    public Date getCreated() {
+    public Instant getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(Instant created) {
         this.created = created;
     }
 
-    public Date getLastUpdate() {
+    public Instant getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Date lastUpdate) {
+    public void setLastUpdate(Instant lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
