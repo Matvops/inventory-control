@@ -10,6 +10,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Entity
@@ -61,13 +62,13 @@ public class Product implements Serializable {
 
     @PrePersist
     private void onCreate(){
-        this.created = Instant.now();
-        this.lastUpdate = Instant.now();
+        this.created = Instant.now().minus(3L, ChronoUnit.HOURS);
+        this.lastUpdate = Instant.now().minus(3L, ChronoUnit.HOURS);
     }
 
     @PreUpdate
     private void onUpdate(){
-        this.lastUpdate = Instant.now();
+        this.lastUpdate = Instant.now().minus(3L, ChronoUnit.HOURS);
     }
 
     public CategoryEnum getCategoryEnum() {

@@ -8,6 +8,7 @@ import com.cadenassi.inventory_control.model.transactions.payment.Payment;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
@@ -60,13 +61,13 @@ public class Sale{
 
     @PrePersist
     private void onCreate(){
-        this.created = Instant.now();
-        this.lastUpdate = Instant.now();
+        this.created = Instant.now().minus(3L, ChronoUnit.HOURS);
+        this.lastUpdate = Instant.now().minus(3L, ChronoUnit.HOURS);
     }
 
     @PreUpdate
     private void onUpdate(){
-        this.lastUpdate = Instant.now();
+        this.lastUpdate = Instant.now().minus(3L, ChronoUnit.HOURS);
     }
 
     public void total(){

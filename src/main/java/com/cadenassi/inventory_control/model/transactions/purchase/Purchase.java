@@ -1,12 +1,11 @@
 package com.cadenassi.inventory_control.model.transactions.purchase;
 
-import com.cadenassi.inventory_control.model.person.Employee;
 import com.cadenassi.inventory_control.model.product.Product;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Entity
@@ -40,13 +39,13 @@ public class Purchase implements Serializable {
 
     @PrePersist
     private void onCreate(){
-        this.created = Instant.now();
-        this.lastUpdate = Instant.now();
+        this.created = Instant.now().minus(3L, ChronoUnit.HOURS);
+        this.lastUpdate = Instant.now().minus(3L, ChronoUnit.HOURS);
     }
 
     @PreUpdate
     private void onUpdate(){
-        this.lastUpdate = Instant.now();
+        this.lastUpdate = Instant.now().minus(3L, ChronoUnit.HOURS);
     }
 
     public Long getId() {

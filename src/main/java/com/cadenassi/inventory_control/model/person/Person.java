@@ -8,6 +8,7 @@ import javax.swing.text.DateFormatter;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
@@ -45,13 +46,13 @@ public abstract class Person implements Serializable {
 
     @PrePersist
     private void onCreate(){
-        this.created = Instant.now();
-        this.lastUpdate = Instant.now();
+        this.created = Instant.now().minus(3L, ChronoUnit.HOURS);
+        this.lastUpdate = Instant.now().minus(3L, ChronoUnit.HOURS);
     }
 
     @PreUpdate
     private void onUpdate(){
-        this.lastUpdate = Instant.now();
+        Instant.now().minus(3L, ChronoUnit.HOURS);
     }
 
     public abstract Set<Sale> getSales();
