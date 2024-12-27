@@ -17,6 +17,6 @@ spring:
     enabled: true
     baseline-on-migrate: true
 springdoc:
-  pathsToMatch: /person/v1/**, /product/v1/**
+  pathsToMatch: /person/v1/**, /product/v1/**, /purchase/v1/**
   swagger-ui:
     use-root-path: true
