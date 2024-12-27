@@ -1,15 +1,13 @@
 package com.cadenassi.inventory_control.model.transactions.purchase;
 
 import com.cadenassi.inventory_control.model.person.Employee;
+import com.cadenassi.inventory_control.model.product.Product;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "purchase")
@@ -31,16 +29,13 @@ public class Purchase implements Serializable {
     @Column(name = "last_update")
     private Instant lastUpdate;
 
-    @OneToMany(mappedBy = "id.purchase")
-    private final Set<PurchaseItem> items = new HashSet<>();
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "purchase_product", joinColumns = @JoinColumn(name = "purchase_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private final List<Product> products = new ArrayList<>();
 
     public Purchase() {
-        total();
-    }
 
-    public Purchase(String description) {
-        this.description = description;
-        total();
     }
 
     @PrePersist
@@ -54,10 +49,6 @@ public class Purchase implements Serializable {
         this.lastUpdate = Instant.now();
     }
 
-    public void total(){
-        this.items.forEach(x -> this.price =+ x.subTotal());
-    }
-
     public Long getId() {
         return id;
     }
@@ -66,7 +57,7 @@ public class Purchase implements Serializable {
         return price;
     }
 
-    protected void setPrice(Float price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
@@ -78,8 +69,8 @@ public class Purchase implements Serializable {
         this.description = description;
     }
 
-    public Set<PurchaseItem> getItems() {
-        return items;
+    public List<Product> getProducts() {
+        return products;
     }
 
     public Instant getCreated() {

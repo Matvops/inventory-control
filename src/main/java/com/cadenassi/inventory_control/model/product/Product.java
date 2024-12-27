@@ -3,7 +3,7 @@ package com.cadenassi.inventory_control.model.product;
 import com.cadenassi.inventory_control.enums.CategoryEnum;
 import com.cadenassi.inventory_control.enums.BrandEnum;
 import com.cadenassi.inventory_control.enums.MaterialEnum;
-import com.cadenassi.inventory_control.model.transactions.purchase.PurchaseItem;
+import com.cadenassi.inventory_control.model.transactions.purchase.Purchase;
 import com.cadenassi.inventory_control.model.transactions.sale.SaleItem;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -41,8 +41,8 @@ public class Product implements Serializable {
     @Embedded
     private Category category = new Category();
 
-    @OneToMany(mappedBy = "id.product")
-    private Set<PurchaseItem> itemsPurchase = new HashSet<>();
+    @ManyToMany(mappedBy = "products")
+    private Set<Purchase> purchases = new HashSet<>();
 
     @OneToMany(mappedBy = "id.product")
     private Set<SaleItem> itemsSale = new HashSet<>();
@@ -161,8 +161,8 @@ public class Product implements Serializable {
     }
 
     @JsonIgnore
-    public Set<PurchaseItem> getItemsPurchase() {
-        return itemsPurchase;
+    public Set<Purchase> getPurchases() {
+        return purchases;
     }
 
     @JsonIgnore

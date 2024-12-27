@@ -4,9 +4,12 @@ import com.cadenassi.inventory_control.model.transactions.sale.Sale;
 import jakarta.persistence.*;
 
 
+import javax.swing.text.DateFormatter;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
