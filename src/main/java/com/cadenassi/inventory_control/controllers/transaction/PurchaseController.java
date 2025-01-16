@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,7 +26,7 @@ public class PurchaseController {
     @Autowired
     private PurchaseProxy proxy;
 
-    @GetMapping
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @Operation(summary = "Get all purchases", description = "Get all purchases",
             tags = {"Purchases"}, responses = {
             @ApiResponse(responseCode = "200", description = "SUCCESS"
@@ -38,7 +39,18 @@ public class PurchaseController {
         return ResponseEntity.ok().body(proxy.getAll());
     }
 
-    @PostMapping
+    @GetMapping(value = "/date", params = {"day", "month", "year"}
+            , produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<List<PurchaseDTO>> getPurchaseByDate(@PathParam(value = "day") String day,
+                                                               @PathParam(value = "month") String month,
+                                                               @PathParam(value = "year") String year){
+        var date = String.format("%s/%s/%s", day, month, year);
+
+        return ResponseEntity.ok().body(proxy.getPurchaseByDate(date));
+    }
+
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
+            , produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @Operation(summary = "Insert a new purchase", description = "insert a new purchase with new products",
             tags = {"Purchases"}, responses = {
             @ApiResponse(responseCode = "201", description = "SUCCESS"

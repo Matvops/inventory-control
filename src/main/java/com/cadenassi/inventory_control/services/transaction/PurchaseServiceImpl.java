@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
@@ -50,10 +51,12 @@ public class PurchaseServiceImpl implements PurchaseService{
         return purchase;
     }
 
+    @Transactional
     @Override
     public List<PurchaseDTO> getPurchaseByDate(String date) {
+        var purchases = mapper.toListPurchaseDTO(purchaseRepository.getPurchaseByDate(date));
 
-        return List.of();
+        return purchases;
     }
 
     @Override
@@ -73,12 +76,6 @@ public class PurchaseServiceImpl implements PurchaseService{
         var dto = mapper.toPurchaseDTO(returned);
 
         return dto;
-    }
-
-    @Override
-    public PurchaseDTO addProductById(PurchaseDTO purchaseDTO) {
-
-        return null;
     }
 
     @Override

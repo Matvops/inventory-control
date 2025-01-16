@@ -18,7 +18,5 @@ public interface PurchaseService {
 
     PurchaseDTO insertPurchase(PurchaseDTO purchaseDTO);
 
-    PurchaseDTO addProductById(PurchaseDTO purchaseDTO);
-
     PurchaseDTO updateDescription(String description);
 }

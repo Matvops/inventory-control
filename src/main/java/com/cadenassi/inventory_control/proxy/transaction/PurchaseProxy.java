@@ -6,6 +6,8 @@ import com.cadenassi.inventory_control.exceptions.ResourceNotFoundException;
 import com.cadenassi.inventory_control.proxy.GenericServiceProxy;
 import com.cadenassi.inventory_control.services.transaction.PurchaseService;
 import com.cadenassi.inventory_control.services.transaction.PurchaseServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.*;
@@ -18,6 +20,7 @@ import java.util.List;
 @Service
 public class PurchaseProxy extends GenericServiceProxy implements PurchaseService {
 
+    private static final Logger log = LoggerFactory.getLogger(PurchaseProxy.class);
     @Autowired
     private PurchaseServiceImpl service;
 
@@ -76,11 +79,6 @@ public class PurchaseProxy extends GenericServiceProxy implements PurchaseServic
         return service.insertPurchase(purchaseDTO);
     }
 
-    @Override
-    public PurchaseDTO addProductById(PurchaseDTO purchaseDTO) {
-        return null;
-    }
-
 
     @Override
     public PurchaseDTO updateDescription(String description) {
@@ -102,13 +100,12 @@ public class PurchaseProxy extends GenericServiceProxy implements PurchaseServic
         validateDayMonthAndYear(day, month, year);
 
         return LocalDateTime.of(year, month, day, 0, 0, 0)
-                .toInstant(ZoneOffset.of(ZoneId
-                        .systemDefault()
-                        .getId()));
+                .atZone(ZoneId.systemDefault())
+                .toInstant();
     }
 
     private String toPatternInstant(String pattern){
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy")
                 .withZone(ZoneId.systemDefault());
 
 
@@ -136,7 +133,7 @@ public class PurchaseProxy extends GenericServiceProxy implements PurchaseServic
     private void validateDayMonthAndYear(int day, int month, int year){
         if(day < 1 || day > 31) throw new InvalidArgumentException("DAY " + day + " NOT EXISTS!");
         if(month < 1 || month > 12) throw new InvalidArgumentException("INVALID MONTH");
-        if(year < 1970 || year > Instant.now().get(ChronoField.YEAR)) throw new InvalidArgumentException("INVALID YEAR");
+        if(year < 1970) throw new InvalidArgumentException("INVALID YEAR");
 
 
         if(month == 2 && day > 28) {
