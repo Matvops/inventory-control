@@ -59,23 +59,28 @@ public class PurchaseServiceImpl implements PurchaseService{
         return purchases;
     }
 
+    @Transactional
     @Override
     public List<PurchaseDTO> getPurchaseByTimeRange(String first, String last) {
-        return List.of();
+        var purchases = mapper.toListPurchaseDTO(purchaseRepository.getPurchaseByTimeRange(first, last));
+
+        return purchases;
     }
 
 
     @Override
     public PurchaseDTO insertPurchase(PurchaseDTO purchaseDTO) {
-        log.info("{}", purchaseDTO.getPrice());
+
         purchaseDTO.total();
-        log.info("{}", purchaseDTO.getPrice());
-        var purchase = mapper.toPurchase(purchaseDTO);
-        log.info("{}", purchaseDTO.getPrice());
-        var returned = purchaseRepository.save(purchase);
-        var dto = mapper.toPurchaseDTO(returned);
+
+        var dto = mapper.toPurchaseDTO(purchaseRepository.save(mapper.toPurchase(purchaseDTO)));
 
         return dto;
+    }
+
+    @Override
+    public PurchaseDTO addQuantityProduct() {
+        return null;
     }
 
     @Override

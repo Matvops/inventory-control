@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -79,9 +78,15 @@ public class PurchaseProxy extends GenericServiceProxy implements PurchaseServic
         return service.insertPurchase(purchaseDTO);
     }
 
+    @Override
+    public PurchaseDTO addQuantityProduct() {
+        return null;
+    }
+
 
     @Override
     public PurchaseDTO updateDescription(String description) {
+
         return null;
     }
 
@@ -110,6 +115,8 @@ public class PurchaseProxy extends GenericServiceProxy implements PurchaseServic
 
 
         LocalDate date = LocalDate.parse(pattern, fmt);
+
+        log.info(date.toString());
 
         return date.toString();
     }

@@ -14,5 +14,6 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
     @Procedure(procedureName = "get_purchase_by_date")
     List<Purchase> getPurchaseByDate(@Param("date") String date);
 
-
+    @Procedure(procedureName = "get_purchase_by_time_range")
+    List<Purchase> getPurchaseByTimeRange(@Param("first") String first, @Param("last") String last);
 }

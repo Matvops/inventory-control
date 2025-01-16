@@ -43,10 +43,28 @@ public class PurchaseController {
             , produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<List<PurchaseDTO>> getPurchaseByDate(@PathParam(value = "day") String day,
                                                                @PathParam(value = "month") String month,
-                                                               @PathParam(value = "year") String year){
+                                                               @PathParam(value = "year") String year) {
         var date = String.format("%s/%s/%s", day, month, year);
 
         return ResponseEntity.ok().body(proxy.getPurchaseByDate(date));
+    }
+
+
+    @GetMapping(value = "/date", params = {"first", "last"}
+            , produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @Operation(summary = "get purchases by time range", description = "get purchases by time range, with the parameters first (first date) and last (last date)"
+            , tags = {"Purchases"}, responses = {
+            @ApiResponse(responseCode = "200", description = "SUCCESS"
+                    , content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE
+                    , array = @ArraySchema(schema = @Schema(implementation = PurchaseDTO.class)))),
+            @ApiResponse(responseCode = "400", description = "BAD REQUEST", content = @Content),
+            @ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content),
+            @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content)
+    })
+    public ResponseEntity<List<PurchaseDTO>> getPurchaseByTimeRange(@PathParam(value = "first") String first,
+                                                              @PathParam(value = "last") String last) {
+
+        return ResponseEntity.ok().body(proxy.getPurchaseByTimeRange(first, last));
     }
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
@@ -59,7 +77,7 @@ public class PurchaseController {
             @ApiResponse(responseCode = "400", description = "BAD REQUEST", content = @Content),
             @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content)
     })
-    public ResponseEntity<PurchaseDTO> insertPurchase(@RequestBody PurchaseDTO purchaseDTO){
+    public ResponseEntity<PurchaseDTO> insertPurchase(@RequestBody PurchaseDTO purchaseDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(proxy.insertPurchase(purchaseDTO));
     }
 }
